@@ -32,20 +32,18 @@ Router.prototype.route = function() {
     ])
     .then(() => {
       if(typeof this.routes[req.method][req.url.pathname] === 'function') {
-        console.log('router triggered');
         this.routes[req.method][req.url.pathname](req, res);
         return;
       }
-      console.log(this.routes);
       console.error('route not found line40');
       res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.write('not found line 42');
+      res.write('not found line 40');
       res.end();
     })
     .catch(err => {
       console.error(err);
       res.writeHead(400, {'Content-Type': 'text/plain'});
-      res.write('bad request line 47');
+      res.write('bad request line 46');
       res.end();
     });
   };

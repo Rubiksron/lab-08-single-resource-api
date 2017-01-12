@@ -3,7 +3,6 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 const storage = {};
-const pool = [];
 
 exports.fetchAll = function(note) {
   if (!note) return Promise.reject(new Error('expected note'));
@@ -17,9 +16,8 @@ exports.createItem = function(note, content) {
   if (!content) return Promise.reject(new Error('expected content'));
 
   let json = JSON.stringify(content);
-  pool.push(content);
   return fs.writeFileProm(`${__dirname}/../data/note/${content.id}.json`, json)
-  .then(() => content)
+  .then(() =>  { console.log('created a new item');content;})
   .catch( err => Promise.reject(err));
 };
 
@@ -46,7 +44,7 @@ exports.deleteItem = function(note, id) {
     if(!id) return reject(new Error('expected id'));
 
     return fs.unlinkProm(`${__dirname}/../data/note/${id}.json`)
-    .then( () => id)
+    .then( () => {id;console.log('successfully deleted: ' + id);})
     .catch( (err) => reject(err));
   });
 };

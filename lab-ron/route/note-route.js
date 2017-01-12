@@ -8,7 +8,6 @@ const Note = require('../model/note.js');
 module.exports = function(router){
 
   router.get('/api/note', function(req, res) {
-    console.log('inside of the router function, note-route.js');
     if (req.url.query.id) {
       storage.fetchItem('note', req.url.query.id)
       .then(note => {
@@ -19,7 +18,7 @@ module.exports = function(router){
       .catch( err => {
         console.error(err);
         res.writeHead(404, {'Content-Type':'text/plain'});
-        res.write('note found line 24\n');
+        res.write('note found line 22\n');
         res.end();
       });
       return;
@@ -34,12 +33,12 @@ module.exports = function(router){
         .catch(err => {
           console.error(err);
           res.writeHead(404, {'Content-Type':'text/plain'});
-          res.write('not found line 39\n');
+          res.write('not found line 37\n');
         });
         return;
       }
       res.writeHead(400, {'Content-Type':'text/plain'});
-      res.write('bad request line 44');
+      res.write('bad request line 41');
       res.end();
     }
   });
@@ -56,12 +55,12 @@ module.exports = function(router){
     } catch (err) {
       console.error(err);
       res.writeHead(400, {'Content-Type': 'text/plain'});
-      res.write('bad request, line50');
+      res.write('bad request, line58');
       res.end();
     }
   });
+
   router.delete('/api/note', function(req, res){
-    console.log(req.body);
     if(req.body.id){
       storage.deleteItem('note', req.body.id)
      .then(() => {
@@ -78,7 +77,7 @@ module.exports = function(router){
     res.writeHead(400, {
       'Content-Type': 'text/plain',
     });
-    res.write('bad request line83');
+    res.write('bad request line80');
     res.end();
   });
 };

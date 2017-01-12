@@ -43,7 +43,7 @@ describe('testing note routes', function() {
         expect(res.status).to.equal(200);
         expect(res.body.note).to.equal('hello');
         expect(res.body.content).to.equal('good bye');
-        expect(res.body.id).to.equal(`${note.id}`)
+        expect(res.body.id).to.equal(`${note.id}`);
         done();
       });
     });
